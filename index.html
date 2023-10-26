@@ -19,9 +19,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./prices.css" />
+
     </head>
 
-    <body>
+    <body style="background-color: rgb(245, 245, 226);">
         <nav class="flex">
             <h1 class="title big" style="font-size: 25px;">Грузоперевозки.</h1>
             <a href="javascript:void(0)" class="ham" onclick="closer()">
@@ -118,6 +120,30 @@
                 </section>
             </div>
             
+            <h2 class="cl-h2" style="margin-top: 15px;">Узнайте стоимость размещения грузов</h2>
+            <div class="container" style="margin-top: 5px; margin-bottom: 15px;">
+                <div class="left">
+                    <form class="cl-form">
+                        <label class="cl-label" for="activity">Выберете ваш профиль деятельности</label>
+                        <select id="activity">
+                            <option value="freight">Перевозчик грузов</option>
+                            <option value="expediter">Экспедитор</option>
+                        </select>
+                        <label class="cl-label" for="quantity">Кол-во грузов в месяц (шт.)</label>
+                        <input class="cl-input" type="number" id="quantity" oninput="calculatePrice()">
+                        <label class="cl-label" for="price">Стоимость в месяц</label>
+                        <input class="cl-input" type="text" id="price" readonly>
+                    </form>
+                </div>
+                <div class="right">
+                    <div class="info">
+                        <p>Вы можете бесплатно размещать грузы в течение 30 дней — бесплатный период начнётся, когда вы выставите первый груз на площадку.</p>
+                        <p>С 31-го дня размещения платные — от 5 до 50 рублей за груз. Чем больше грузов в месяц вы добавляете, тем дешевле. Деньги списываются с вашего виртуального счёта.</p>
+                        <p><strong>Стоимость:</strong> Экспедиторам доступна скидка 30% на размещение любого количества грузов.</p>
+                    </div>
+                </div>
+            </div>
+            
             <div class="divisions division_3 padding_4x" style="background-color: antiquewhite;">
                 <section class="flex padding_1x">
                 <figure>
@@ -155,5 +181,29 @@
         <a href="#" id="roll_back" class="animate"><i class="fa fa-angle-up"></i></a>
 
         <script type="text/javascript" src="./main.js"></script>
+
+        <script>
+            function calculatePrice() {
+                const quantityInput = document.getElementById('quantity');
+                const priceInput = document.getElementById('price');
+                const quantity = parseInt(quantityInput.value);
+    
+                if (isNaN(quantity) || quantity < 0) {
+                    quantityInput.value = ''
+                } else {
+                    let price = 0;
+                    if (quantity <= 100) {
+                        price = 50 * quantity;
+                    } else if (quantity <= 2000) {
+                        price = 40 * quantity;
+                    } else {
+                        price = 30 * quantity;
+                    }
+    
+                    // Установить цену в поле "Стоимость в месяц"
+                    priceInput.value = price + ' рублей';
+                }
+            }
+        </script>
     </body>
 </html>

@@ -611,7 +611,6 @@ footer .flex_content a:hover{
 ****************************/
 header{
     width:100%;
-    height: 100vh;
     background:linear-gradient(to right, var(--black) 10%, var(--gray) 50%, rgba(1,1,1,0.1) 100%), url("https://i.artfile.ru/1024x768_70201_[www.ArtFile.ru].jpg");
     background-size:cover;
     background-position:bottom;
